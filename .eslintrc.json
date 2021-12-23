@@ -36,6 +36,10 @@
               "namedComponents": "arrow-function",
               "unnamedComponents": "arrow-function"
             }
-          ]
+          ],
+        "operator-linebreak": ["error", "after"] ,
+        "object-curly-newline": ["error", {
+          "ObjectPattern": "never"
+        }]
     }
 }
