@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import photo from '../images/egor-klyuchnyk-full-x-season-web.jpg';
-import calculateCoordinates from './utils/get-coordinates';
+import calculateCoordinates from './utils/calculate-coordinates';
 
 const PhotoContainer: FC = () => {
   const style = { width: '90%' };
