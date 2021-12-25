@@ -34,9 +34,9 @@ const DropdownMenu: FC<Props> = ({ clickPosition }) => {
           backgroundColor: 'white',
         }}
       >
-        <li>One</li>
-        <li>Two</li>
-        <li>Three</li>
+        <li>Tom</li>
+        <li>Neo</li>
+        <li>Batman</li>
       </ul>
     </div>
   );
