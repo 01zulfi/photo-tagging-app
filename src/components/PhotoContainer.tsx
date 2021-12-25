@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import photo from '../images/egor-klyuchnyk-full-x-season-web.jpg';
-import calculateCoordinates from './utils/calculate-coordinates';
+import calculateCoordinates from '../utils/calculate-coordinates';
 import DropdownMenu from './DropdownMenu';
 
 const PhotoContainer: FC = () => {
