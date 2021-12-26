@@ -14,7 +14,7 @@ const Start: FC<StartProps> = ({ handleStartClick }) => (
       <ul>
         <li>Tom</li>
         <li>Neo</li>
-        <li>Button</li>
+        <li>Batman</li>
       </ul>
     </div>
   </section>
