@@ -39,7 +39,7 @@
           ],
         "operator-linebreak": ["error", "after"] ,
         "object-curly-newline": ["error", {
-          "ObjectPattern": "never"
+          "ObjectPattern": {"multiline": true}
         }]
     }
 }
