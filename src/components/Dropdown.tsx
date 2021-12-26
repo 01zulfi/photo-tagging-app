@@ -2,9 +2,15 @@ import React, { FC } from 'react';
 
 interface Props {
   dropdownPosition: { x: number; y: number };
+  characters: { name: string; id: string }[];
+  handleDropdownClick: () => void;
 }
 
-const DropdownMenu: FC<Props> = ({ dropdownPosition }) => {
+const DropdownMenu: FC<Props> = ({
+  handleDropdownClick,
+  characters,
+  dropdownPosition,
+}) => {
   const { x, y } = dropdownPosition;
 
   return (
@@ -34,9 +40,15 @@ const DropdownMenu: FC<Props> = ({ dropdownPosition }) => {
           backgroundColor: 'white',
         }}
       >
-        <li>Tom</li>
-        <li>Neo</li>
-        <li>Batman</li>
+        {characters.map((character) => (
+          <li
+            key={character.id}
+            aria-hidden="true"
+            onClick={handleDropdownClick}
+          >
+            {character.name}
+          </li>
+        ))}
       </ul>
     </div>
   );
