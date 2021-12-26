@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 interface Props {
   dropdownPosition: { x: number; y: number };
   characters: { name: string; id: string }[];
-  handleDropdownClick: () => void;
+  handleDropdownClick: any;
 }
 
 const Dropdown: FC<Props> = ({
@@ -45,6 +45,7 @@ const Dropdown: FC<Props> = ({
             key={character.id}
             aria-hidden="true"
             onClick={handleDropdownClick}
+            data-id={character.id}
           >
             {character.name}
           </li>
