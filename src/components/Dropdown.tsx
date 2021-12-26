@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 
 interface Props {
-  clickPosition: number[];
+  dropdownPosition: { x: number; y: number };
 }
 
-const DropdownMenu: FC<Props> = ({ clickPosition }) => {
-  const [x, y] = clickPosition;
+const DropdownMenu: FC<Props> = ({ dropdownPosition }) => {
+  const { x, y } = dropdownPosition;
 
   return (
     <div
