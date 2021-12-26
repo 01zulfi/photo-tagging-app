@@ -6,7 +6,7 @@ interface Props {
   handleDropdownClick: () => void;
 }
 
-const DropdownMenu: FC<Props> = ({
+const Dropdown: FC<Props> = ({
   handleDropdownClick,
   characters,
   dropdownPosition,
@@ -54,4 +54,4 @@ const DropdownMenu: FC<Props> = ({
   );
 };
 
-export default DropdownMenu;
+export default Dropdown;
