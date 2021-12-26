@@ -40,6 +40,7 @@
         "operator-linebreak": ["error", "after"] ,
         "object-curly-newline": ["error", {
           "ObjectPattern": {"multiline": true}
-        }]
+        }],
+        "implicit-arrow-linebreak": 0
     }
 }
