@@ -4,7 +4,7 @@ import ImageContainer from './components/ImageContainer';
 import Start from './components/Start';
 
 const App = () => {
-  const [isStartClicked, setIsStartedClicked] = useState(false);
+  const [isStartClicked, setIsStartClicked] = useState(false);
   const [shouldDropdownRender, setShouldDropdownRender] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState<{
     x: number;
@@ -14,7 +14,7 @@ const App = () => {
     y: 0,
   });
 
-  const handleStartClick = (): void => setIsStartedClicked(true);
+  const handleStartClick = (): void => setIsStartClicked(true);
 
   const handleImageClick = (
     event: React.MouseEvent<HTMLImageElement>,
