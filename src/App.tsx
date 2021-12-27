@@ -4,7 +4,7 @@ import ImageContainer from './components/ImageContainer';
 import Start from './components/Start';
 import Navbar from './components/Navbar';
 import calculateCoordinates from './utils/calculate-coordinates';
-import uniqueId from './utils/unique-id';
+import characters from './utils/characters';
 
 interface Coordinates {
   x: number;
@@ -18,11 +18,6 @@ const App: FC = () => {
     x: 0,
     y: 0,
   });
-  const [characters] = useState([
-    { name: 'Tom', id: uniqueId() },
-    { name: 'Neo', id: uniqueId() },
-    { name: 'Batman', id: uniqueId() },
-  ]);
   const [clickCoordinates, setClickCoordinates] = useState<Coordinates>({
     x: 0,
     y: 0,
