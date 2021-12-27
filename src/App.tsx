@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Dropdown from './components/Dropdown';
 import ImageContainer from './components/ImageContainer';
 import Start from './components/Start';
@@ -11,7 +11,7 @@ interface Coordinates {
   y: number;
 }
 
-const App = () => {
+const App: FC = () => {
   const [isStartClicked, setIsStartClicked] = useState(false);
   const [shouldDropdownRender, setShouldDropdownRender] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState<Coordinates>({
