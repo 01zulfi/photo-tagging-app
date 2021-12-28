@@ -68,10 +68,8 @@ const App: FC = () => {
           yMax,
         });
         setSuccess(flag);
-        console.log(flag);
       }
     })();
-    console.log({ currentCharacter, clickCoordinates });
   }, [currentCharacter]);
 
   return (
