@@ -1,5 +1,6 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useRef } from 'react';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import Loading from './Loading';
 
 interface ImageContainerProps {
   handleImageClick: any;
@@ -7,7 +8,8 @@ interface ImageContainerProps {
 
 const ImageContainer: FC<ImageContainerProps> = ({ handleImageClick }) => {
   const [imageURL, setImageURL] = useState('');
-  const style = { width: '90%', cursor: 'crosshair' };
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const image = useRef<any>(null);
 
   useEffect(() => {
     (async () => {
@@ -19,19 +21,24 @@ const ImageContainer: FC<ImageContainerProps> = ({ handleImageClick }) => {
     })();
   }, []);
 
+  useEffect(() => {
+    if (!imageURL) return;
+    image.current.onload = () => setIsImageLoaded(true);
+  }, [imageURL]);
+
   return (
     <div>
       <div className="image-container">
-        {imageURL ? (
+        {!isImageLoaded && <Loading />}
+        {imageURL && (
           <img
             onClick={handleImageClick}
             aria-hidden="true"
             src={imageURL}
             alt="find-characters"
-            style={style}
+            style={{ width: '90%', cursor: 'crosshair' }}
+            ref={image}
           />
-        ) : (
-          <h2>Loading...</h2>
         )}
       </div>
     </div>
