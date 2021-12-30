@@ -30,6 +30,7 @@ const App: FC = () => {
     id: string;
   }>({ name: ' ', id: '' });
   const [success, setSuccess] = useState(false);
+  const [shouldStatusRender, setShouldStatusRender] = useState(false);
 
   const handleStartClick = (): void => setIsStartClicked(true);
 
@@ -68,6 +69,7 @@ const App: FC = () => {
           yMax,
         });
         setSuccess(flag);
+        setShouldStatusRender(true);
       }
     })();
   }, [currentCharacter]);
@@ -87,7 +89,9 @@ const App: FC = () => {
           handleDropdownClick={handleDropdownClick}
         />
       )}
-      {success && <Status success={success} />}
+      {shouldStatusRender && (
+        <Status renderHandler={setShouldStatusRender} success={success} />
+      )}
     </div>
   );
 };
