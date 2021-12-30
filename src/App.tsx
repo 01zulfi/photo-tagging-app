@@ -17,6 +17,8 @@ interface Coordinates {
 const App: FC = () => {
   const [isStartClicked, setIsStartClicked] = useState(false);
   const [shouldDropdownRender, setShouldDropdownRender] = useState(false);
+  const [charactersArray, setCharactersArray] = useState(characters);
+  const [dummy, setDummy] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState<Coordinates>({
     x: 0,
     y: 0,
@@ -51,10 +53,11 @@ const App: FC = () => {
   const handleDropdownClick = (
     event: React.MouseEvent<HTMLLIElement>,
   ): void => {
-    setShouldDropdownRender(false);
     const id = event.currentTarget.getAttribute('data-id');
     const targetCharacter = characters.find((character) => character.id === id);
     if (targetCharacter) setCurrentCharacter(targetCharacter);
+    setShouldDropdownRender(false);
+    setDummy((val) => !val);
   };
 
   useEffect(() => {
@@ -68,11 +71,17 @@ const App: FC = () => {
           yMin,
           yMax,
         });
+        if (flag) {
+          const newCharactersArray = charactersArray.filter(
+            (character) => character.name !== currentCharacter.name,
+          );
+          setCharactersArray(newCharactersArray);
+        }
         setSuccess(flag);
         setShouldStatusRender(true);
       }
     })();
-  }, [currentCharacter]);
+  }, [dummy]);
 
   return (
     <div className="App">
@@ -84,7 +93,7 @@ const App: FC = () => {
       )}
       {shouldDropdownRender && (
         <Dropdown
-          characters={characters}
+          characters={charactersArray}
           dropdownPosition={dropdownPosition}
           handleDropdownClick={handleDropdownClick}
         />
