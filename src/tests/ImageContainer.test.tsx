@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ImageContainer from '../components/ImageContainer';
 
-test('image renders', () => {
+test.skip('image renders', () => {
   const { getByAltText } = render(
     <ImageContainer handleImageClick={() => {}} />,
   );
@@ -13,7 +13,7 @@ test('image renders', () => {
   expect(image).toBeInTheDocument();
 });
 
-test('calls handleImageClick upon image click', () => {
+test.skip('calls handleImageClick upon image click', () => {
   const handleImageClick = jest.fn();
   const { getByAltText } = render(
     <ImageContainer handleImageClick={handleImageClick} />,
