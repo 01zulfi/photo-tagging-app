@@ -4,9 +4,13 @@ import Loading from './Loading';
 
 interface ImageContainerProps {
   handleImageClick: any;
+  startTimer: any;
 }
 
-const ImageContainer: FC<ImageContainerProps> = ({ handleImageClick }) => {
+const ImageContainer: FC<ImageContainerProps> = ({
+  startTimer,
+  handleImageClick,
+}) => {
   const [imageURL, setImageURL] = useState('');
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const image = useRef<any>(null);
@@ -23,7 +27,11 @@ const ImageContainer: FC<ImageContainerProps> = ({ handleImageClick }) => {
 
   useEffect(() => {
     if (!imageURL) return;
-    image.current.onload = () => setIsImageLoaded(true);
+    const onLoadCallback = () => {
+      setIsImageLoaded(true);
+      startTimer();
+    };
+    image.current.onload = onLoadCallback;
   }, [imageURL]);
 
   return (

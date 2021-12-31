@@ -33,6 +33,7 @@ const App: FC = () => {
   }>({ name: ' ', id: '' });
   const [success, setSuccess] = useState(false);
   const [shouldStatusRender, setShouldStatusRender] = useState(false);
+  const [shouldTimerStart, setShouldTimerStart] = useState(false);
 
   const handleStartClick = (): void => setIsStartClicked(true);
 
@@ -83,11 +84,16 @@ const App: FC = () => {
     })();
   }, [dummy]);
 
+  const startTimer = () => setShouldTimerStart(true);
+
   return (
     <div className="App">
-      <Navbar />
+      <Navbar shouldTimerStart={shouldTimerStart} />
       {isStartClicked ? (
-        <ImageContainer handleImageClick={handleImageClick} />
+        <ImageContainer
+          handleImageClick={handleImageClick}
+          startTimer={startTimer}
+        />
       ) : (
         <Start handleStartClick={handleStartClick} />
       )}
