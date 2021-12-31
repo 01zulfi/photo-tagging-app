@@ -9,7 +9,6 @@ const Timer: FC<TimerProps> = ({ shouldTimerStart }) => {
 
   useEffect(() => {
     if (!shouldTimerStart) return () => {};
-    console.log(seconds);
     const time = setInterval(
       () => setSeconds((prevProps) => prevProps + 1),
       1000,
