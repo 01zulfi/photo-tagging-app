@@ -8,6 +8,7 @@ import calculateCoordinates from './utils/calculate-coordinates';
 import characters from './utils/characters';
 import areCoordinatesInRange from './utils/are-coordinates-in-range';
 import Status from './components/Status';
+import GameEnd from './components/GameEnd';
 
 interface Coordinates {
   x: number;
@@ -34,6 +35,7 @@ const App: FC = () => {
   const [success, setSuccess] = useState(false);
   const [shouldStatusRender, setShouldStatusRender] = useState(false);
   const [shouldTimerStart, setShouldTimerStart] = useState(false);
+  const [isGameEnded, setIsGameEnded] = useState(false);
 
   const handleStartClick = (): void => setIsStartClicked(true);
 
@@ -84,11 +86,16 @@ const App: FC = () => {
     })();
   }, [dummy]);
 
+  useEffect(() => {
+    if (charactersArray.length === 0) setIsGameEnded(true);
+  }, [charactersArray]);
+
   const startTimer = () => setShouldTimerStart(true);
 
   return (
     <div className="App">
       <Navbar shouldTimerStart={shouldTimerStart} />
+
       {isStartClicked ? (
         <ImageContainer
           handleImageClick={handleImageClick}
@@ -97,6 +104,7 @@ const App: FC = () => {
       ) : (
         <Start handleStartClick={handleStartClick} />
       )}
+
       {shouldDropdownRender && (
         <Dropdown
           characters={charactersArray}
@@ -104,9 +112,12 @@ const App: FC = () => {
           handleDropdownClick={handleDropdownClick}
         />
       )}
+
       {shouldStatusRender && (
         <Status renderHandler={setShouldStatusRender} success={success} />
       )}
+
+      {isGameEnded && <GameEnd />}
     </div>
   );
 };
