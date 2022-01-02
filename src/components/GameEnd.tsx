@@ -1,7 +1,12 @@
 import React, { FC, useEffect } from 'react';
+import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
 
 const GameEnd: FC = () => {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const auth = getAuth();
+    signInAnonymously(auth).catch((error) => console.log(error));
+    onAuthStateChanged(auth, (user) => console.log(user));
+  }, []);
 
   return (
     <section
