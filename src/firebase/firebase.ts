@@ -39,7 +39,7 @@ const addEndTime = async () => {
   const end = Date.now();
   await updateDoc(userRef, {
     end,
-    score: (start - end) * 0.001,
+    score: (end - start) * 0.001,
   });
 };
 
