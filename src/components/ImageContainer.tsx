@@ -4,12 +4,12 @@ import Loading from './Loading';
 
 interface ImageContainerProps {
   handleImageClick: any;
-  addStartTime: any;
+  imageOpacity: number;
 }
 
 const ImageContainer: FC<ImageContainerProps> = ({
   handleImageClick,
-  addStartTime,
+  imageOpacity,
 }) => {
   const [imageURL, setImageURL] = useState('');
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -28,14 +28,19 @@ const ImageContainer: FC<ImageContainerProps> = ({
   useEffect(() => {
     if (!imageURL) return;
     const onLoadCallback = () => {
-      addStartTime();
       setIsImageLoaded(true);
     };
     image.current.onload = onLoadCallback;
   }, [imageURL]);
 
   return (
-    <div>
+    <div
+      style={{
+        opacity: imageOpacity,
+        pointerEvents: imageOpacity ? 'auto' : 'none',
+        height: imageOpacity ? 'fit-content' : '0px',
+      }}
+    >
       <div className="image-container">
         {!isImageLoaded && <Loading />}
         {imageURL && (

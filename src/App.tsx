@@ -17,10 +17,11 @@ interface Coordinates {
 
 const App: FC = () => {
   const [isStartClicked, setIsStartClicked] = useState(false);
-  const [isStartTimeAdded, setIsStartTimeAdded] = useState(false);
   const [shouldDropdownRender, setShouldDropdownRender] = useState(false);
   const [charactersArray, setCharactersArray] = useState(characters);
   const [dummy, setDummy] = useState(false);
+  const [imageOpacity, setImageOpacity] = useState(0);
+  const [shouldTimerStart, setShouldTimerStart] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState<Coordinates>({
     x: 0,
     y: 0,
@@ -82,33 +83,36 @@ const App: FC = () => {
 
   useEffect(() => {
     if (charactersArray.length !== 0) return;
+    clearInterval(1);
     setIsGameEnded(true);
     firebase.addEndTime();
   }, [charactersArray]);
 
   useEffect(() => {
-    (async () => {
-      await firebase.addUser();
-    })();
-  }, []);
+    if (isStartClicked) {
+      setImageOpacity(1);
+    }
+  }, [isStartClicked]);
 
-  const addStartTime = async () => {
-    await firebase.addStartTime();
-    setIsStartTimeAdded(true);
-  };
+  useEffect(() => {
+    (async () => {
+      if (isStartClicked) {
+        await firebase.addUser();
+        setShouldTimerStart(true);
+      }
+    })();
+  }, [isStartClicked]);
 
   return (
     <div className="App">
-      <Navbar isStartTimeAdded={isStartTimeAdded} />
+      <Navbar shouldTimerStart={shouldTimerStart} />
 
-      {isStartClicked ? (
-        <ImageContainer
-          handleImageClick={handleImageClick}
-          addStartTime={addStartTime}
-        />
-      ) : (
-        <Start handleStartClick={handleStartClick} />
-      )}
+      {!isStartClicked && <Start handleStartClick={handleStartClick} />}
+
+      <ImageContainer
+        handleImageClick={handleImageClick}
+        imageOpacity={imageOpacity}
+      />
 
       {shouldDropdownRender && (
         <Dropdown

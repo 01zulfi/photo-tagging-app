@@ -4,6 +4,7 @@ import {
   getDoc,
   setDoc,
   updateDoc,
+  Timestamp,
 } from 'firebase/firestore';
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
 
@@ -23,45 +24,31 @@ const addUser = async () => {
     userId = user.uid;
     await setDoc(doc(getFirestore(), 'times', user.uid), {
       id: user.uid,
+      start: Timestamp.now(),
     });
-    console.log(userId);
   });
 };
 
 const addStartTime = async () => {
-  console.log(Date.now());
   const userRef = doc(getFirestore(), 'times', userId);
   await updateDoc(userRef, {
-    start: Date.now(),
+    start: Timestamp.now(),
   });
 };
 
-// const getUserId = async () => {
-//   console.log(userId);
-//   const userRef = doc(getFirestore(), 'times', userId);
-//   const userSnap = await getDoc(userRef);
-
-//   const data = userSnap.data();
-
-//   if (!data) return '';
-//   return data.id;
-// };
-
-const getUserId = async () => userId;
+const getUserId = () => userId;
 
 const addEndTime = async () => {
-  console.log(Date.now());
   const userRef = doc(getFirestore(), 'times', userId);
   const userSnap = await getDoc(userRef);
 
   const data = userSnap.data();
 
   if (!data) return;
-  const { start } = data;
-  const end = Date.now();
+  const end = Timestamp.now();
   await updateDoc(userRef, {
     end,
-    score: (end - start) * 0.001,
+    score: end.seconds - data.start.seconds,
   });
 };
 
@@ -72,6 +59,14 @@ const addName = async (name: string) => {
   });
 };
 
+const getStartTime = async () => {
+  const userRef = doc(getFirestore(), 'times', userId);
+  const userSnap = await getDoc(userRef);
+
+  const data = userSnap.data();
+  return data?.start.seconds;
+};
+
 const firebase = {
   getUserId,
   getCharacterData,
@@ -79,6 +74,7 @@ const firebase = {
   addEndTime,
   addName,
   addStartTime,
+  getStartTime,
 };
 
 export default firebase;

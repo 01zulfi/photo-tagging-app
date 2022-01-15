@@ -7,7 +7,6 @@ const GameEnd: FC = () => {
   const inputHandler = (event: any) => setName(event.target.value);
 
   const submitHandler = () => {
-    console.log(name);
     firebase.addName(name);
   };
 
