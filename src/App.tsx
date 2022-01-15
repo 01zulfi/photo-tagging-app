@@ -17,6 +17,7 @@ interface Coordinates {
 
 const App: FC = () => {
   const [isStartClicked, setIsStartClicked] = useState(false);
+  const [isStartTimeAdded, setIsStartTimeAdded] = useState(false);
   const [shouldDropdownRender, setShouldDropdownRender] = useState(false);
   const [charactersArray, setCharactersArray] = useState(characters);
   const [dummy, setDummy] = useState(false);
@@ -34,7 +35,6 @@ const App: FC = () => {
   }>({ name: ' ', id: '' });
   const [success, setSuccess] = useState(false);
   const [shouldStatusRender, setShouldStatusRender] = useState(false);
-  const [shouldTimerStart, setShouldTimerStart] = useState(false);
   const [isGameEnded, setIsGameEnded] = useState(false);
 
   const handleStartClick = (): void => setIsStartClicked(true);
@@ -86,16 +86,25 @@ const App: FC = () => {
     firebase.addEndTime();
   }, [charactersArray]);
 
-  const startTimer = () => setShouldTimerStart(true);
+  useEffect(() => {
+    (async () => {
+      await firebase.addUser();
+    })();
+  }, []);
+
+  const addStartTime = async () => {
+    await firebase.addStartTime();
+    setIsStartTimeAdded(true);
+  };
 
   return (
     <div className="App">
-      <Navbar shouldTimerStart={shouldTimerStart} />
+      <Navbar isStartTimeAdded={isStartTimeAdded} />
 
       {isStartClicked ? (
         <ImageContainer
           handleImageClick={handleImageClick}
-          startTimer={startTimer}
+          addStartTime={addStartTime}
         />
       ) : (
         <Start handleStartClick={handleStartClick} />

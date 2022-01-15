@@ -23,12 +23,34 @@ const addUser = async () => {
     userId = user.uid;
     await setDoc(doc(getFirestore(), 'times', user.uid), {
       id: user.uid,
-      start: Date.now(),
     });
+    console.log(userId);
   });
 };
 
+const addStartTime = async () => {
+  console.log(Date.now());
+  const userRef = doc(getFirestore(), 'times', userId);
+  await updateDoc(userRef, {
+    start: Date.now(),
+  });
+};
+
+// const getUserId = async () => {
+//   console.log(userId);
+//   const userRef = doc(getFirestore(), 'times', userId);
+//   const userSnap = await getDoc(userRef);
+
+//   const data = userSnap.data();
+
+//   if (!data) return '';
+//   return data.id;
+// };
+
+const getUserId = async () => userId;
+
 const addEndTime = async () => {
+  console.log(Date.now());
   const userRef = doc(getFirestore(), 'times', userId);
   const userSnap = await getDoc(userRef);
 
@@ -50,6 +72,13 @@ const addName = async (name: string) => {
   });
 };
 
-const firebase = { getCharacterData, addUser, addEndTime, addName };
+const firebase = {
+  getUserId,
+  getCharacterData,
+  addUser,
+  addEndTime,
+  addName,
+  addStartTime,
+};
 
 export default firebase;

@@ -1,16 +1,15 @@
 import React, { FC, useState, useEffect, useRef } from 'react';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import Loading from './Loading';
-import firebase from '../firebase/firebase';
 
 interface ImageContainerProps {
   handleImageClick: any;
-  startTimer: any;
+  addStartTime: any;
 }
 
 const ImageContainer: FC<ImageContainerProps> = ({
-  startTimer,
   handleImageClick,
+  addStartTime,
 }) => {
   const [imageURL, setImageURL] = useState('');
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -29,9 +28,8 @@ const ImageContainer: FC<ImageContainerProps> = ({
   useEffect(() => {
     if (!imageURL) return;
     const onLoadCallback = () => {
-      firebase.addUser();
+      addStartTime();
       setIsImageLoaded(true);
-      startTimer();
     };
     image.current.onload = onLoadCallback;
   }, [imageURL]);
