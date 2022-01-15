@@ -1,19 +1,14 @@
-import React, { FC, useEffect, useState } from 'react';
-import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
+import React, { FC, useState } from 'react';
+import firebase from '../firebase/firebase';
 
 const GameEnd: FC = () => {
   const [name, setName] = useState('');
-
-  useEffect(() => {
-    const auth = getAuth();
-    signInAnonymously(auth).catch((error) => console.log(error));
-    onAuthStateChanged(auth, (user) => console.log(user));
-  }, []);
 
   const inputHandler = (event: any) => setName(event.target.value);
 
   const submitHandler = () => {
     console.log(name);
+    firebase.addName(name);
   };
 
   return (
@@ -23,8 +18,8 @@ const GameEnd: FC = () => {
         height: '100%',
         background: 'white',
         zIndex: '1',
-        position: 'fixed',
-        top: '0',
+        // position: 'fixed',
+        // top: '0',
       }}
     >
       <h2>Congratulations! You found all of the characters!</h2>

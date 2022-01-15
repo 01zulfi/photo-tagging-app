@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import firebase from './firebase/firebase';
 import Dropdown from './components/Dropdown';
 import ImageContainer from './components/ImageContainer';
 import Start from './components/Start';
@@ -47,12 +47,6 @@ const App: FC = () => {
     setDropdownPosition({ x: event.pageX, y: event.pageY });
   };
 
-  const getCharacterData = async (character: string) => {
-    const characterRef = doc(getFirestore(), 'characters', character);
-    const characterSnap = await getDoc(characterRef);
-    return characterSnap.data();
-  };
-
   const handleDropdownClick = (
     event: React.MouseEvent<HTMLLIElement>,
   ): void => {
@@ -65,7 +59,7 @@ const App: FC = () => {
 
   useEffect(() => {
     (async () => {
-      const data = await getCharacterData(currentCharacter.name);
+      const data = await firebase.getCharacterData(currentCharacter.name);
       if (data) {
         const { xMin, xMax, yMin, yMax } = data;
         const flag = areCoordinatesInRange(clickCoordinates, {
@@ -87,7 +81,9 @@ const App: FC = () => {
   }, [dummy]);
 
   useEffect(() => {
-    if (charactersArray.length === 0) setIsGameEnded(true);
+    if (charactersArray.length !== 0) return;
+    setIsGameEnded(true);
+    firebase.addEndTime();
   }, [charactersArray]);
 
   const startTimer = () => setShouldTimerStart(true);
