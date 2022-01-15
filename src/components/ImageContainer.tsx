@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect, useRef } from 'react';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import Loading from './Loading';
+import firebase from '../firebase/firebase';
 
 interface ImageContainerProps {
   handleImageClick: any;
@@ -28,6 +29,7 @@ const ImageContainer: FC<ImageContainerProps> = ({
   useEffect(() => {
     if (!imageURL) return;
     const onLoadCallback = () => {
+      firebase.addUser();
       setIsImageLoaded(true);
       startTimer();
     };
