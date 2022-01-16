@@ -41,6 +41,7 @@
         "object-curly-newline": ["error", {
           "ObjectPattern": {"multiline": true}
         }],
-        "implicit-arrow-linebreak": 0
+        "implicit-arrow-linebreak": 0,
+        "react/jsx-wrap-multilines": 0
     }
 }
