@@ -5,6 +5,10 @@ import {
   setDoc,
   updateDoc,
   Timestamp,
+  collection,
+  query,
+  orderBy,
+  getDocs,
 } from 'firebase/firestore';
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
 
@@ -67,6 +71,15 @@ const getStartTime = async () => {
   return data?.start.seconds;
 };
 
+const fetchScores = async () => {
+  const scoresRef = collection(getFirestore(), 'times');
+  const scoresQuery = query(scoresRef, orderBy('name'));
+  const scoreSnapshot = await getDocs(scoresQuery);
+  const data: any[] = [];
+  scoreSnapshot.forEach((score) => data.push(score.data()));
+  return data;
+};
+
 const firebase = {
   getUserId,
   getCharacterData,
@@ -75,6 +88,7 @@ const firebase = {
   addName,
   addStartTime,
   getStartTime,
+  fetchScores,
 };
 
 export default firebase;
