@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import firebase from './firebase/firebase';
 import Dropdown from './components/Dropdown';
 import ImageContainer from './components/ImageContainer';
@@ -9,6 +10,7 @@ import characters from './utils/characters';
 import areCoordinatesInRange from './utils/are-coordinates-in-range';
 import Status from './components/Status';
 import GameEnd from './components/GameEnd';
+import Leaderboard from './components/Leaderboard';
 
 interface Coordinates {
   x: number;
@@ -105,28 +107,49 @@ const App: FC = () => {
 
   return (
     <div className="App">
-      <Navbar shouldTimerStart={shouldTimerStart} />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="*"
+            element={<Navbar shouldTimerStart={shouldTimerStart} />}
+          />
+        </Routes>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div>
+                {!isStartClicked && (
+                  <Start handleStartClick={handleStartClick} />
+                )}
 
-      {!isStartClicked && <Start handleStartClick={handleStartClick} />}
+                <ImageContainer
+                  handleImageClick={handleImageClick}
+                  imageOpacity={imageOpacity}
+                />
 
-      <ImageContainer
-        handleImageClick={handleImageClick}
-        imageOpacity={imageOpacity}
-      />
+                {shouldDropdownRender && (
+                  <Dropdown
+                    characters={charactersArray}
+                    dropdownPosition={dropdownPosition}
+                    handleDropdownClick={handleDropdownClick}
+                  />
+                )}
 
-      {shouldDropdownRender && (
-        <Dropdown
-          characters={charactersArray}
-          dropdownPosition={dropdownPosition}
-          handleDropdownClick={handleDropdownClick}
-        />
-      )}
+                {shouldStatusRender && (
+                  <Status
+                    renderHandler={setShouldStatusRender}
+                    success={success}
+                  />
+                )}
 
-      {shouldStatusRender && (
-        <Status renderHandler={setShouldStatusRender} success={success} />
-      )}
-
-      {isGameEnded && <GameEnd />}
+                {isGameEnded && <GameEnd />}
+              </div>
+            }
+          />
+          <Route path="leaderboard" element={<Leaderboard />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };
