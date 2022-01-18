@@ -78,17 +78,14 @@ const App: FC = () => {
           yMin,
           yMax,
         });
-        let newCharactersArray: any = [];
         if (flag) {
-          newCharactersArray = charactersArray.filter(
+          const newCharactersArray = charactersArray.filter(
             (character) => character.name !== currentCharacter.name,
           );
           setCharactersArray(newCharactersArray);
         }
-        if (newCharactersArray.length !== 0) {
-          setSuccess(flag);
-          setShouldStatusRender(true);
-        }
+        setSuccess(flag);
+        setShouldStatusRender(true);
       }
     })();
   }, [dummy]);
@@ -96,9 +93,9 @@ const App: FC = () => {
   useEffect(() => {
     if (charactersArray.length !== 0) return;
     setImageOpacity(0);
-    setIsGameEnded(true);
     setShouldTimerStart(false);
     firebase.addEndTime();
+    setIsGameEnded(true);
   }, [charactersArray]);
 
   useEffect(() => {
