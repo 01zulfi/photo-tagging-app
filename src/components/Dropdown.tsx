@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 
-interface Props {
+interface DropdownProps {
   dropdownPosition: { x: number; y: number };
   characters: { name: string; id: string }[];
   handleDropdownClick: any;
 }
 
-const Dropdown: FC<Props> = ({
+const Dropdown: FC<DropdownProps> = ({
   handleDropdownClick,
   characters,
   dropdownPosition,
