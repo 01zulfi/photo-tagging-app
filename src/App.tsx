@@ -78,14 +78,17 @@ const App: FC = () => {
           yMin,
           yMax,
         });
+        let newCharactersArray: any = [];
         if (flag) {
-          const newCharactersArray = charactersArray.filter(
+          newCharactersArray = charactersArray.filter(
             (character) => character.name !== currentCharacter.name,
           );
           setCharactersArray(newCharactersArray);
         }
-        setSuccess(flag);
-        setShouldStatusRender(true);
+        if (newCharactersArray.length !== 0) {
+          setSuccess(flag);
+          setShouldStatusRender(true);
+        }
       }
     })();
   }, [dummy]);
