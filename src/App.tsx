@@ -167,7 +167,14 @@ const App: FC = () => {
               </div>
             }
           />
-          <Route path="leaderboard" element={<Leaderboard />} />
+          <Route
+            path="leaderboard"
+            element={
+              <Wrapper>
+                <Leaderboard />
+              </Wrapper>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
