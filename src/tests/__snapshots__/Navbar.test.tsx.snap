@@ -5,41 +5,47 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="navbar"
+      <header
+        class="sc-gsDKAQ kXebAn"
       >
-        <h1>
-          Photo Tagging App
+        <h1
+          class="sc-dkPtRN dgEvov"
+        >
+          find the characters
         </h1>
-        <div
-          class="timer"
-        />
+        <p
+          class="sc-eCImPb dHgcqA"
+        >
+          0s
+        </p>
         <button
-          class="leaderboard"
-          type="button"
+          class="sc-hKwDye emkORy"
         >
           Leaderboard
         </button>
-      </div>
+      </header>
     </div>
   </body>,
   "container": <div>
-    <div
-      class="navbar"
+    <header
+      class="sc-gsDKAQ kXebAn"
     >
-      <h1>
-        Photo Tagging App
+      <h1
+        class="sc-dkPtRN dgEvov"
+      >
+        find the characters
       </h1>
-      <div
-        class="timer"
-      />
+      <p
+        class="sc-eCImPb dHgcqA"
+      >
+        0s
+      </p>
       <button
-        class="leaderboard"
-        type="button"
+        class="sc-hKwDye emkORy"
       >
         Leaderboard
       </button>
-    </div>
+    </header>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

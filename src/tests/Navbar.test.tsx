@@ -4,10 +4,10 @@ import '@testing-library/jest-dom';
 import Navbar from '../components/Navbar';
 
 test('matches snapshot', () => {
-  expect(render(<Navbar />)).toMatchSnapshot();
+  expect(render(<Navbar shouldTimerStart={false} />)).toMatchSnapshot();
 });
 
 test('renders correct heading', () => {
-  const { getByRole } = render(<Navbar />);
-  expect(getByRole('heading')).toHaveTextContent(/photo tagging app/i);
+  const { getByRole } = render(<Navbar shouldTimerStart={false} />);
+  expect(getByRole('heading')).toHaveTextContent(/find the characters/i);
 });
