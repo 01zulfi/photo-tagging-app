@@ -45,7 +45,14 @@ const Timer: FC = () => {
     };
   }, [startTime]);
 
-  return <StyledTimer>{time}</StyledTimer>;
+  const unit = 's';
+
+  return (
+    <StyledTimer>
+      {time}
+      {unit}
+    </StyledTimer>
+  );
 };
 
 export default Timer;

@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import firebase from './firebase/firebase';
 import Dropdown from './components/Dropdown';
@@ -11,6 +12,12 @@ import areCoordinatesInRange from './utils/are-coordinates-in-range';
 import Status from './components/Status';
 import GameEnd from './components/GameEnd';
 import Leaderboard from './components/Leaderboard';
+
+const StartWrapper = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
 
 interface Coordinates {
   x: number;
@@ -107,7 +114,13 @@ const App: FC = () => {
   }, [isStartClicked]);
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        height: '100vh',
+        background: 'rgb(18, 18, 18)',
+      }}
+    >
       <BrowserRouter>
         <Routes>
           <Route
@@ -121,7 +134,9 @@ const App: FC = () => {
             element={
               <div>
                 {!isStartClicked && (
-                  <Start handleStartClick={handleStartClick} />
+                  <StartWrapper>
+                    <Start handleStartClick={handleStartClick} />
+                  </StartWrapper>
                 )}
 
                 <ImageContainer

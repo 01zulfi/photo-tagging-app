@@ -13,20 +13,21 @@ const StyledNavbar = styled.header`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #384058;
+  background-color: rgba(255, 255, 255, 0.05);
   padding-left: 20px;
   padding-right: 20px;
 `;
 
 const StyledHeading = styled.h1`
-  color: #d3deff;
+  font-family: 'Anton', sans-serif;
+  color: white;
   font-weight: bolder;
 `;
 
 const StyledLBButton = styled.button`
   height: fit-content;
   padding: 20px;
-  background-color: #ffb84d;
+  background-color: #bb86fc;
   border: 0;
   border-radius: 10px;
 `;
@@ -35,7 +36,8 @@ const Zero = styled.p`
   font-family: 'Anton', 'sans-serif';
   color: white;
   font-size: 2rem;
-  background: black;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
   width: 25%;
   text-align: center;
   margin-left: auto;
@@ -45,7 +47,7 @@ const Zero = styled.p`
 const Navbar: FC<NavbarProps> = ({ shouldTimerStart }) => (
   <StyledNavbar>
     <StyledHeading>find the characters</StyledHeading>
-    {shouldTimerStart ? <Timer /> : <Zero>0</Zero>}
+    {shouldTimerStart ? <Timer /> : <Zero>0s</Zero>}
     <StyledLBButton>Leaderboard</StyledLBButton>
   </StyledNavbar>
 );
