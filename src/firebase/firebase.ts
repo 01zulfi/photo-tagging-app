@@ -10,6 +10,7 @@ import {
   orderBy,
   getDocs,
 } from 'firebase/firestore';
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
 
 let userId = '';
@@ -80,6 +81,14 @@ const fetchScores = async () => {
   return data;
 };
 
+const fetchImageURL = async () => {
+  const storage = getStorage();
+  const fetchURL = await getDownloadURL(
+    ref(storage, 'egor-klyuchnyk-full-x-season-web.jpg'),
+  );
+  return fetchURL;
+};
+
 const firebase = {
   getUserId,
   getCharacterData,
@@ -89,6 +98,7 @@ const firebase = {
   addStartTime,
   getStartTime,
   fetchScores,
+  fetchImageURL,
 };
 
 export default firebase;
