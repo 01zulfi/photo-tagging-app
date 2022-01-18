@@ -121,7 +121,7 @@ const App: FC = () => {
         background: 'rgb(18, 18, 18)',
       }}
     >
-      <BrowserRouter>
+      <BrowserRouter basename="/photo-tagging-app">
         <Routes>
           <Route
             path="*"
