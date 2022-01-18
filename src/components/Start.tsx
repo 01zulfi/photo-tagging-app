@@ -1,7 +1,5 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
-import { onAuthStateChanged, getAuth } from 'firebase/auth';
-import Loading from './Loading';
 import tom from '../images/tom.png';
 import batman from '../images/batman.png';
 import neo from '../images/neo-matrix.png';
@@ -72,41 +70,27 @@ interface StartProps {
   handleStartClick: () => void;
 }
 
-const Start: FC<StartProps> = ({ handleStartClick }) => {
-  const [canStart, setCanStart] = useState(false);
-
-  useEffect(() => {
-    onAuthStateChanged(getAuth(), (user) => {
-      if (user) setCanStart(true);
-    });
-  }, []);
-
-  return (
-    <Wrapper>
-      <StyledHeading>characters to find</StyledHeading>
-      <CharactersWrapper>
-        <CharacterWrapper>
-          <CharacterText>Tom</CharacterText>
-          <CharacterImage src={tom} alt="tom" />
-        </CharacterWrapper>
-        <CharacterWrapper>
-          <CharacterText>Neo</CharacterText>
-          <CharacterImage src={neo} alt="neo" />
-        </CharacterWrapper>
-        <CharacterWrapper>
-          <CharacterText>Batman</CharacterText>
-          <CharacterImage src={batman} alt="batman" />
-        </CharacterWrapper>
-      </CharactersWrapper>
-      {canStart ? (
-        <StartButton type="button" id="start" onClick={handleStartClick}>
-          <h3>Start</h3>
-        </StartButton>
-      ) : (
-        <Loading />
-      )}
-    </Wrapper>
-  );
-};
+const Start: FC<StartProps> = ({ handleStartClick }) => (
+  <Wrapper>
+    <StyledHeading>characters to find</StyledHeading>
+    <CharactersWrapper>
+      <CharacterWrapper>
+        <CharacterText>Tom</CharacterText>
+        <CharacterImage src={tom} alt="tom" />
+      </CharacterWrapper>
+      <CharacterWrapper>
+        <CharacterText>Neo</CharacterText>
+        <CharacterImage src={neo} alt="neo" />
+      </CharacterWrapper>
+      <CharacterWrapper>
+        <CharacterText>Batman</CharacterText>
+        <CharacterImage src={batman} alt="batman" />
+      </CharacterWrapper>
+    </CharactersWrapper>
+    <StartButton type="button" id="start" onClick={handleStartClick}>
+      <h3>Start</h3>
+    </StartButton>
+  </Wrapper>
+);
 
 export default Start;
