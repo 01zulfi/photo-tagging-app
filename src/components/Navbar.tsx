@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Timer from './Timer';
 
@@ -49,11 +50,17 @@ const Zero = styled.p`
   margin-right: 5%;
 `;
 
-const Navbar: FC<NavbarProps> = ({ shouldTimerStart }) => (
-  <StyledNavbar>
-    <StyledHeading>find the characters</StyledHeading>
-    {shouldTimerStart ? <Timer /> : <Zero>0s</Zero>}
-    <StyledLBButton>Leaderboard</StyledLBButton>
-  </StyledNavbar>
-);
+const Navbar: FC<NavbarProps> = ({ shouldTimerStart }) => {
+  const navigate = useNavigate();
+  const clickHandler = () => navigate('/leaderboard');
+
+  return (
+    <StyledNavbar>
+      <StyledHeading>find the characters</StyledHeading>
+      {shouldTimerStart ? <Timer /> : <Zero>0s</Zero>}
+      <StyledLBButton onClick={clickHandler}>Leaderboard</StyledLBButton>
+    </StyledNavbar>
+  );
+};
+
 export default Navbar;
