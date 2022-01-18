@@ -1,6 +1,18 @@
 import React, { FC, useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { Timestamp, onSnapshot, doc, getFirestore } from 'firebase/firestore';
 import firebase from '../firebase/firebase';
+
+const StyledTimer = styled.p`
+  font-family: 'Anton', 'sans-serif';
+  color: white;
+  font-size: 2rem;
+  background: black;
+  width: 25%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: 5%;
+`;
 
 const Timer: FC = () => {
   const [time, setTime] = useState(0);
@@ -17,7 +29,7 @@ const Timer: FC = () => {
     if (!startTime) return () => {};
     const interval = setInterval(() => {
       setTime(Timestamp.now().seconds - startTime);
-    }, 1300);
+    }, 1000);
     let unsub: any;
     (async () => {
       const id = firebase.getUserId();
@@ -33,7 +45,7 @@ const Timer: FC = () => {
     };
   }, [startTime]);
 
-  return <p>{time}</p>;
+  return <StyledTimer>{time}</StyledTimer>;
 };
 
 export default Timer;

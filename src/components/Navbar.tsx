@@ -38,6 +38,8 @@ const Zero = styled.p`
   background: black;
   width: 25%;
   text-align: center;
+  margin-left: auto;
+  margin-right: 5%;
 `;
 
 const Navbar: FC<NavbarProps> = ({ shouldTimerStart }) => (
