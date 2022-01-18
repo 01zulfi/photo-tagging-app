@@ -13,7 +13,7 @@ import Status from './components/Status';
 import GameEnd from './components/GameEnd';
 import Leaderboard from './components/Leaderboard';
 
-const StartWrapper = styled.section`
+const Wrapper = styled.section`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -134,9 +134,9 @@ const App: FC = () => {
             element={
               <div>
                 {!isStartClicked && (
-                  <StartWrapper>
+                  <Wrapper>
                     <Start handleStartClick={handleStartClick} />
-                  </StartWrapper>
+                  </Wrapper>
                 )}
 
                 <ImageContainer
@@ -159,7 +159,11 @@ const App: FC = () => {
                   />
                 )}
 
-                {isGameEnded && <GameEnd />}
+                {isGameEnded && (
+                  <Wrapper>
+                    <GameEnd />
+                  </Wrapper>
+                )}
               </div>
             }
           />
