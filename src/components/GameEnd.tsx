@@ -1,10 +1,13 @@
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { onSnapshot, getFirestore, doc } from 'firebase/firestore';
-import React, { FC, useEffect, useState } from 'react';
 import firebase from '../firebase/firebase';
 
 const GameEnd: FC = () => {
   const [name, setName] = useState('');
   const [score, setScore] = useState(0);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const nameInput = useRef<any>(null);
 
   useEffect(() => {
     (async () => {
@@ -19,7 +22,12 @@ const GameEnd: FC = () => {
   const inputHandler = (event: any) => setName(event.target.value);
 
   const submitHandler = () => {
-    firebase.addName(name);
+    if (!nameInput.current.checkValidity()) {
+      setErrorMessage('name required');
+    } else {
+      setErrorMessage('');
+      firebase.addName(name);
+    }
   };
 
   return (
@@ -41,8 +49,15 @@ const GameEnd: FC = () => {
       <h4>Submit your score</h4>
       <label htmlFor="name-input">
         Enter name:
-        <input onChange={inputHandler} type="text" id="name-input" />
+        <input
+          onChange={inputHandler}
+          type="text"
+          id="name-input"
+          required
+          ref={nameInput}
+        />
       </label>
+      <span>{errorMessage}</span>
       <button onClick={submitHandler} type="button">
         Submit Score
       </button>
