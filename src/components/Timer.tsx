@@ -4,6 +4,7 @@ import { Timestamp, onSnapshot, doc, getFirestore } from 'firebase/firestore';
 import firebase from '../firebase/firebase';
 
 const StyledTimer = styled.p`
+  @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
   font-family: 'Anton', 'sans-serif';
   color: white;
   font-size: 2rem;

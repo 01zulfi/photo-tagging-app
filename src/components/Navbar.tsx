@@ -7,7 +7,6 @@ interface NavbarProps {
 }
 
 const StyledNavbar = styled.header`
-  @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -19,9 +18,9 @@ const StyledNavbar = styled.header`
 `;
 
 const StyledHeading = styled.h1`
+  @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
   font-family: 'Anton', sans-serif;
   color: white;
-  font-weight: bolder;
 `;
 
 const StyledLBButton = styled.button`
@@ -33,6 +32,7 @@ const StyledLBButton = styled.button`
 `;
 
 const Zero = styled.p`
+  @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
   font-family: 'Anton', 'sans-serif';
   color: white;
   font-size: 2rem;
