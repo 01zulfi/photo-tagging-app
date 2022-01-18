@@ -29,6 +29,11 @@ const StyledLBButton = styled.button`
   background-color: #bb86fc;
   border: 0;
   border-radius: 10px;
+  &:hover {
+    color: white;
+    background: #651fff;
+    cursor: pointer;
+  }
 `;
 
 const Zero = styled.p`
