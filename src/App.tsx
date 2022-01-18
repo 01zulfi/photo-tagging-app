@@ -85,8 +85,9 @@ const App: FC = () => {
 
   useEffect(() => {
     if (charactersArray.length !== 0) return;
-    clearInterval(1);
+    setImageOpacity(0);
     setIsGameEnded(true);
+    setShouldTimerStart(false);
     firebase.addEndTime();
   }, [charactersArray]);
 
