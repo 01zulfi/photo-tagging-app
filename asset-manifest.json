@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/photo-tagging-app/static/css/main.08a195ed.css",
+    "main.js": "/photo-tagging-app/static/js/main.36c1191d.js",
+    "static/media/batman.png": "/photo-tagging-app/static/media/batman.1ab9c0101f07a0532ee3.png",
+    "static/media/tom.png": "/photo-tagging-app/static/media/tom.b2df4b747b1234f1267f.png",
+    "static/media/neo-matrix.png": "/photo-tagging-app/static/media/neo-matrix.67c1a4bd38e94cc70bcf.png",
+    "index.html": "/photo-tagging-app/index.html",
+    "main.08a195ed.css.map": "/photo-tagging-app/static/css/main.08a195ed.css.map",
+    "main.36c1191d.js.map": "/photo-tagging-app/static/js/main.36c1191d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.08a195ed.css",
+    "static/js/main.36c1191d.js"
+  ]
+}
