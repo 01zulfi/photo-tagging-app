@@ -1,8 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import tom from '../images/tom.png';
 import batman from '../images/batman.png';
 import neo from '../images/neo-matrix.png';
+import Loading from './Loading';
+import firebase from '../firebase/firebase';
 
 const Wrapper = styled.div`
   display: flex;
@@ -70,27 +72,42 @@ interface StartProps {
   handleStartClick: () => void;
 }
 
-const Start: FC<StartProps> = ({ handleStartClick }) => (
-  <Wrapper>
-    <StyledHeading>characters to find</StyledHeading>
-    <CharactersWrapper>
-      <CharacterWrapper>
-        <CharacterText>Tom</CharacterText>
-        <CharacterImage src={tom} alt="tom" />
-      </CharacterWrapper>
-      <CharacterWrapper>
-        <CharacterText>Neo</CharacterText>
-        <CharacterImage src={neo} alt="neo" />
-      </CharacterWrapper>
-      <CharacterWrapper>
-        <CharacterText>Batman</CharacterText>
-        <CharacterImage src={batman} alt="batman" />
-      </CharacterWrapper>
-    </CharactersWrapper>
-    <StartButton type="button" id="start" onClick={handleStartClick}>
-      <h3>Start</h3>
-    </StartButton>
-  </Wrapper>
-);
+const Start: FC<StartProps> = ({ handleStartClick }) => {
+  const [canStart, setCanStart] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      await firebase.addUser();
+      setCanStart(true);
+    })();
+  }, []);
+
+  return (
+    <Wrapper>
+      <StyledHeading>characters to find</StyledHeading>
+      <CharactersWrapper>
+        <CharacterWrapper>
+          <CharacterText>Tom</CharacterText>
+          <CharacterImage src={tom} alt="tom" />
+        </CharacterWrapper>
+        <CharacterWrapper>
+          <CharacterText>Neo</CharacterText>
+          <CharacterImage src={neo} alt="neo" />
+        </CharacterWrapper>
+        <CharacterWrapper>
+          <CharacterText>Batman</CharacterText>
+          <CharacterImage src={batman} alt="batman" />
+        </CharacterWrapper>
+      </CharactersWrapper>
+      {!canStart ? (
+        <Loading />
+      ) : (
+        <StartButton type="button" id="start" onClick={handleStartClick}>
+          <h3>Start</h3>
+        </StartButton>
+      )}
+    </Wrapper>
+  );
+};
 
 export default Start;

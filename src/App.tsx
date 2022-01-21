@@ -105,12 +105,9 @@ const App: FC = () => {
   }, [isStartClicked]);
 
   useEffect(() => {
-    (async () => {
-      if (isStartClicked) {
-        await firebase.addUser();
-        setShouldTimerStart(true);
-      }
-    })();
+    if (isStartClicked) {
+      setShouldTimerStart(true);
+    }
   }, [isStartClicked]);
 
   return (
